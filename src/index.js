@@ -12,6 +12,15 @@ document.addEventListener('keydown', (e) => {
     case "Spacebar":
     case " ":
       console.log('Shall trigger jump...');
+      if (!character.classList.contains('jumping')) {
+        character.classList.add('jumping');
+        character.addEventListener("animationend", () => {
+          console.log("Animation ended");
+          character.classList.remove('jumping');
+        });
+      } else {
+        console.warn('Cannot initiate new jump while in the air');
+      }
       break;
     case "Escape":
       console.log('Shall exit fullscreen mode...');

@@ -13,3 +13,13 @@
   left: 50%;
   bottom: 20%;
 }
+
+#character.jumping {
+  animation: jump 1s;
+}
+
+@keyframes jump {
+  0%    { bottom: 20%; }
+  50%   { bottom: 30%; }
+  100%  { bottom: 20%; }
+}
