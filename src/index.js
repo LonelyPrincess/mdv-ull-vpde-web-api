@@ -1,6 +1,25 @@
 console.log('Hello! :3');
 
 const elem = document.getElementById('game-area');
+const character = document.getElementById('character');
+
+// Listen to pressed keys
+document.addEventListener('keydown', (e) => {
+  switch (e.key) {
+    case "Enter":
+      console.log('Shall enter fullscreen mode...');
+      break;
+    case "Spacebar":
+    case " ":
+      console.log('Shall trigger jump...');
+      break;
+    case "Escape":
+      console.log('Shall exit fullscreen mode...');
+      break;
+    default:
+      console.debug(`No action defined for key ${e.key}`);
+  }
+}, false);
 
 const toggleFullscreenMode = elem => {
   if (!document.fullscreenElement) {
