@@ -5,15 +5,15 @@ const character = document.getElementById('character');
 
 ScoreManager.initializeScore();
 
-// Listen to animation end event to know when jump has ended
+// Listen to animation end event to know when jump has ended and increase the score
 character.addEventListener("animationend", () => {
   ScoreManager.incrementScore();
   character.classList.remove('jumping');
 });
 
-// Listen to pressed keys
-document.addEventListener('keydown', (e) => {
-  switch (e.key) {
+// Listen to pressed keys to trigger the required actions
+document.addEventListener('keydown', event => {
+  switch (event.key) {
     case "Enter":
       console.log('Shall enter fullscreen mode...');
       if (!document.fullscreenElement) {
@@ -40,6 +40,6 @@ document.addEventListener('keydown', (e) => {
       }
       break;
     default:
-      console.debug(`No action defined for key ${e.key}`);
+      console.debug(`No action defined for key ${event.key}`);
   }
 }, false);
