@@ -3,7 +3,28 @@ import ScoreManager from './scoreManager.js';
 const gameArea = document.getElementById('game-area');
 const character = document.getElementById('character');
 
+// Fetch initial scores from storage and display them in the UI
 ScoreManager.initializeScore();
+
+// Execute game in fullscreen mode
+const enterFullscreenMode = () => {
+  if (!document.fullscreenElement) {
+    console.log('Displaying game area in fullscreen...');
+    gameArea.requestFullscreen();
+  } else {
+    console.debug('Game is already in fullscreen mode, so do nothing');
+  }
+};
+
+// Exit fullscreen mode
+const exitFullscreenMode = () => {
+  if (document.fullscreenElement) {
+    console.log('Leaving fullscreen mode...');
+    document.exitFullscreen();
+  } else {
+    console.debug('Game is not in fullscreen mode, so do nothing');
+  }
+};
 
 // Listen to animation end event to know when jump has ended and increase the score
 character.addEventListener("animationend", () => {
@@ -15,29 +36,21 @@ character.addEventListener("animationend", () => {
 document.addEventListener('keydown', event => {
   switch (event.key) {
     case "Enter":
-      console.log('Shall enter fullscreen mode...');
-      if (!document.fullscreenElement) {
-        gameArea.requestFullscreen();
-      } else {
-        console.debug('Game is already in fullscreen mode, so do nothing');
-      }
+      console.debug('Shall enter fullscreen mode...');
+      enterFullscreenMode();
       break;
     case "Spacebar":
     case " ":
-      console.log('Shall trigger jump...');
+      console.debug('Shall trigger jump...');
       if (!character.classList.contains('jumping')) {
         character.classList.add('jumping');
       } else {
-        console.warn('Cannot initiate new jump while in the air');
+        console.debug('Cannot initiate new jump while in the air');
       }
       break;
     case "Escape":
-      console.log('Shall exit fullscreen mode...');
-      if (document.fullscreenElement) {
-        document.exitFullscreen();
-      } else {
-        console.debug('Game is not in fullscreen mode, so do nothing');
-      }
+      console.debug('Shall exit fullscreen mode...');
+      exitFullscreenMode();
       break;
     default:
       console.debug(`No action defined for key ${event.key}`);
