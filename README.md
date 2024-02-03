@@ -32,6 +32,11 @@ TODO
 
 TODO
 
+```
+$ npm install live-server -g
+$ live-server .
+```
+
 ### 🔗 References
 
 - [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
