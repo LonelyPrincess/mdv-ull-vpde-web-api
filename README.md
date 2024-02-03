@@ -40,4 +40,4 @@ TODO
 
 ### 🎨 Resources
 
-TODO
+- [EmoticonsText](https://www.emoticonstext.com/)
