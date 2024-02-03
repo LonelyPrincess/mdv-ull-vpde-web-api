@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+
+#instructions {
+  font-family: "Pixelify Sans", sans-serif;
+}
+
 #game-area {
   position: relative;
   width: 800px;
