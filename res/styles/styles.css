@@ -5,35 +5,40 @@
 }
 
 #game-area {
-  position: relative;
   width: 800px;
   height: 450px;
   max-width: 100%;
-  max-height: auto;
-  background: lightgoldenrodyellow;
+  background: lightskyblue;
   border: 1px solid black;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+#playable-area {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 #character {
-  position: absolute;
-  left: 50%;
-  bottom: 20%;
+  font-size: 3rem;
 }
 
 #character.jumping {
-  animation: jump 1s;
+  animation: jump .75s ease-in-out;
 }
 
 @keyframes jump {
-  0%    { bottom: 20%; }
-  50%   { bottom: 30%; }
-  100%  { bottom: 20%; }
+  0%    { margin-bottom: 0; }
+  50%   { margin-bottom: 5rem; }
+  100%  { margin-bottom: 0; }
 }
 
 #score-ui {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 1rem;
+  padding: 2rem;
 }
 
 .input-container {
@@ -53,4 +58,9 @@
   outline: none;
   background: none;
   text-align: center;
+}
+
+#ground {
+  height: 5rem;
+  background: black;
 }
