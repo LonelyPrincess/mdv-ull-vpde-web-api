@@ -13,6 +13,10 @@ h2 {
   color: midnightblue;
 }
 
+em {
+  color: steelblue;
+}
+
 #game-area {
   width: 800px;
   height: 450px;
