@@ -1,50 +1,13 @@
-import storage from './storage.js';
+import ScoreManager from './scoreManager.js';
 
 const gameArea = document.getElementById('game-area');
 const character = document.getElementById('character');
 
-const [currentScoreInput] = document.getElementsByName('current-score');
-const [accumulatedScoreInput] = document.getElementsByName('accumulated-score');
-
-const scoreManager = (() => {
-  let currentScore = 0;
-  let accumulatedScore = 0;
-
-  const updateScoreUI = () => {
-    currentScoreInput.value = currentScore;
-    accumulatedScoreInput.value = accumulatedScore;
-  };
-
-  const initializeScore = () => {
-    currentScore = storage.getFromSessionStorage('score') || 0;
-    accumulatedScore = storage.getFromLocalStorage('score') || 0;
-
-    updateScoreUI();
-  };
-
-  // Increment score and update storage with the new values
-  const incrementScore = () => {
-    currentScore++;
-    storage.setInSessionStorage('score', currentScore);
-
-    accumulatedScore++;
-    storage.setInLocalStorage('score', accumulatedScore);
-
-    updateScoreUI();
-  };
-
-  return {
-    initializeScore,
-    incrementScore,
-  };
-})();
-
-scoreManager.initializeScore();
+ScoreManager.initializeScore();
 
 // Listen to animation end event to know when jump has ended
 character.addEventListener("animationend", () => {
-  console.log({ currentValue: currentScoreInput.value, nextValue: +currentScoreInput.value + 1 });
-  scoreManager.incrementScore();
+  ScoreManager.incrementScore();
   character.classList.remove('jumping');
 });
 
