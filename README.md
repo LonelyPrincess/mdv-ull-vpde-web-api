@@ -4,10 +4,6 @@
 
 This project showcases the usage of a couple of native web APIs that can be relevant for developing games in this platform. The application is a **simple game where the player can make a character jump**, and it's developed by using plain HTML5, CSS3 and vanilla JavaScript.
 
-[Web storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) is used to preserve the player's score in the current browser' session as well as the accumulated score across all sessions so far.
-
-[Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API) is used
-
 ### 🎮 Game controls
 
 The following controls have be defined for this game:
@@ -26,11 +22,19 @@ The following controls have be defined for this game:
 
 TODO
 
+# 🖥️ Fullscreen API
+
+[Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API) is used
+
+# 💾 Web Storage API
+
+[Web storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) is used to preserve the player's score in the current browser' session as well as the accumulated score across all sessions so far.
+
 ## Additional information
 
-### 🖥️ Project specifications
+### 💡 Project specifications
 
-This application should work in any modern browser (ex.: Google Chrome) that supports the following:
+This application should work in any modern browser (ex.: [Google Chrome](https://www.google.com/chrome/)) that supports the following:
 
 - [CSS Animation](https://caniuse.com/css-animation)
 - [Fullscreen API](https://caniuse.com/fullscreen)
