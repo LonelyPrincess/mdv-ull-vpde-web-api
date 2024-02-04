@@ -64,7 +64,62 @@ As we can see here, the API provides a method `exitFullscreen` that can be used 
 
 ### 💾 Web Storage API
 
-[Web storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) is used to preserve the player's score in the current browser' session as well as the accumulated score across all sessions so far.
+[Web storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) allows applications to store certain data in the browser, therefore making it persistant and not fade away if the user reloads the page.
+
+This API provides two different types of storage we can use depending on our needs, and in this demo we've used them both to better illustrate the difference. More specifically, we've used them to store the score of the user, keeping track of the jumps they've managed to make both in the current session and during all time they've used the game.
+
+Scores for the current session are being kept in the **session storage**, where we can store data that will persist during the length of a session. This means **the data will remain there for as long as the browser remains open, but will fade when it's closed**. Because of this, if we reopen the browser and load the game afterwards, we'll notice that the current session score is reset to zero.
+
+On the other hand, **local storage** serves as a more **persistant storage**. Here we'll be storing the total score of the user. If we close the browser and open it again, total we had before will remain untouched.
+
+This API, therefore, can be pretty useful to save certain information just like user preferences (ex.: language) or just keep records of the highest scored achieved in a specific browser.
+
+Of course, this is not a good solution for games in which we really need for data to persist forever, as there are several limitations. First, web storage serves as a collection of key-value pairs which can only be used to keep pretty basic data that can be stored as strings. Second, it offers a limited amount of space, so we cannot store data which is too large in size.
+
+Lastly, and maybe the most important point, the data is tightly coupled to the browser instance in which the game has run. If the player decides to clear all their cached data, reinstall the browser or try out the game on a different PC, they will NOT be able to access their old information anymore. Data lives on that specific browser instance, and will only persist as long as the browser in use remains the same.
+
+Although there's also the [IndexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) which could be used as a replacement for the web storage API when we need to store larger chunks of data and support more complex data types, the last forementioned limitation also applies here.
+
+This simple storage API is enough for this use case, but for larger games in which players wouldn't like their data to be lost under any circumnstances, we cannot rely on none of these APIs. Instead, we'd need to depend on a real database in our game server to ensure users are able to retrieve their data even if they switch computers or try out a different web browser.
+
+#### Implementation notes
+
+Code to manage the score counters can be found in the [`scoreManager.js`](./src/scoreManager.js) file, whereas [`storage.js`](./src/storage.js) contains the code that directly interacts with the web storage API.
+
+The later is quite simple, as it just provides methods to write and read variables from both the local and session storages. Part of these methods include a check to validate that these storages are available, to avoid errors in case the browser in which we run the game does not support this feature.
+
+As for the `ScoreManager` namespace, this will internally keep track of the current scores and provide methods to update / read the values in the storage, as well as refresh the counters in the UI based on these values.
+
+When the game starts, the `initializeScore` method is called to fetch the scores previously set in the storage. Code for this method can be seen below:
+
+```javascript
+const initializeScore = () => {
+  currentScore = storage.getFromSessionStorage('score') || 0;
+  accumulatedScore = storage.getFromLocalStorage('score') || 0;
+
+  console.debug('Initial scores: ', { currentScore, accumulatedScore });
+  renderScores();
+};
+```
+
+The `getFromSessionStorage` and `getFromLocalStorage` methods internally call `sessionStorage.getItem` and `localStorage.getItem` respectively to obtain this data. If the storage does not yet contain a score (in which case, `getItem` will return `null`), or if the web storage API is not supported, then we initialize the counters to `0` by default.
+
+As for when these values are updated, this currently happens within the `incrementScore` method which is called in the `animationend` event handler of the character. End of this animation means that the character has landed and that therefore a jump has been completed, so it's at this time that we'll increase both counters in one unit.
+
+```javascript
+const incrementScore = () => {
+  currentScore++;
+  storage.setInSessionStorage('score', currentScore);
+
+  accumulatedScore++;
+  storage.setInLocalStorage('score', accumulatedScore);
+
+  console.debug('Updated scores: ', { currentScore, accumulatedScore });
+  renderScores();
+};
+```
+
+Same as before, `setInSessionStorage` and `setInLocalStorage` will respectively call `sessionStorage.setItem` and `localStorage.setItem` to write the updated score in the web storage. With this we were able to achieve a functional way to preserve the user records, so that they're not lost as soon as the user leaves the page.
 
 ## Additional information
 
