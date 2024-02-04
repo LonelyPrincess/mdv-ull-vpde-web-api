@@ -39,7 +39,6 @@ $ live-server .
 
 ### 🔗 References
 
-- [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
 - [Fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API)
 - [Web storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API)
 - [Animation end event](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationend_event)
