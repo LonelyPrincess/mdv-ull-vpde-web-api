@@ -15,9 +15,11 @@ h2 {
 
 em {
   color: steelblue;
+  font-style: normal;
 }
 
 #game-area {
+  margin: 5rem auto;
   width: 800px;
   height: 450px;
   max-width: 100%;
