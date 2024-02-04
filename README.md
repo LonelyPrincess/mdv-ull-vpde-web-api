@@ -22,7 +22,7 @@ The following controls have be defined for this game:
 
 In this section we'll cover the APIs that were integrated in the project, explaining how they add value to our game and some brief details on the implementation.
 
-# 🖥️ Fullscreen API
+### 🖥️ Fullscreen API
 
 The [fullscreen API](https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API) does not only allow for the page to be rendered in fullscreen: it can also be used to display certain elements in that mode.
 
@@ -30,8 +30,11 @@ In this case, we used it to put all focus on the game area. **Upon entering the 
 
 This is useful for the player to fully focus in the in-game elements, reducing the noise and avoiding having to scroll down the page to see what's relevant to them.
 
+#### Implementation notes
+
+The following function is used to enter the fullscreen mode, and will be called whenever the player presses the _"Enter"_ key:
+
 ```javascript
-// Execute game in fullscreen mode
 const enterFullscreenMode = () => {
   if (!document.fullscreenElement) {
     console.log('Displaying game area in fullscreen...');
@@ -40,8 +43,13 @@ const enterFullscreenMode = () => {
     console.debug('Game is already in fullscreen mode, so do nothing');
   }
 };
+```
 
-// Exit fullscreen mode
+`gameArea` is the element where we want the fullscreen content to focus on, and `requestFullscreen` is the API method that makes it possible to achieve the desired result. Before calling this, we first check whether we're already in fullscreen mode by checking the value of `document.fullscreenElement`: that variable being set means that fullscreen mode is currently active, so we'll perform no action in this case.
+
+Method to leave the fullscreen mode is quite similar, as seen in the code below:
+
+```javascript
 const exitFullscreenMode = () => {
   if (document.fullscreenElement) {
     console.log('Leaving fullscreen mode...');
@@ -52,7 +60,9 @@ const exitFullscreenMode = () => {
 };
 ```
 
-# 💾 Web Storage API
+As we can see here, the API provides a method `exitFullscreen` that can be used to return to the default window mode. We'll call this method only in case we identify the fullscreen mode is currently enabled.
+
+### 💾 Web Storage API
 
 [Web storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API) is used to preserve the player's score in the current browser' session as well as the accumulated score across all sessions so far.
 
@@ -88,4 +98,5 @@ $ live-server .
 
 ### 🎨 Resources
 
+- [Google Fonts](https://fonts.google.com/)
 - [EmoticonsText](https://www.emoticonstext.com/)
