@@ -4,6 +4,8 @@
 
 This project showcases the usage of a couple of native web APIs that can be relevant for developing games in this platform. The application is a **simple game where the player can make a character jump**, and it's developed by using plain HTML5, CSS3 and vanilla JavaScript.
 
+The application has been deployed in [GitHub Pages](https://pages.github.com/), so a live demo can be found [here](https://lonelyprincess.github.io/mdv-ull-vpde-web-api/).
+
 ### 🎮 Game controls
 
 The following controls have be defined for this game:
@@ -14,7 +16,7 @@ The following controls have be defined for this game:
 | Exit fullscreen mode | ⌨️ | Escape |
 | Jump | ⌨️ | Space |
 
-### 🎦 Live preview
+### 🎦 Game preview
 
 ![Game preview](./res/screenshots/game-preview.gif)
 
